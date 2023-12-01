@@ -1,0 +1,4 @@
+.idea
+*.pyc
+myworld
+db.sqlite3
