@@ -17,6 +17,7 @@ def place_list(request):
 def booking(request, place_id):
     if request.user.is_authenticated:
         template = loader.get_template('booking.html')
+        message = ''
         if request.method == 'GET':
             post_form = BookingForm(initial={
                 'place': place_id,
@@ -25,12 +26,12 @@ def booking(request, place_id):
             post_form = BookingForm(request.POST)
             if post_form.is_valid():
                 post_form.save()
-                return redirect('place_list')
-
+                message = 'Booking success.'
         else:
             return HttpResponseBadRequest()
         context = {
             'post_form': post_form,
+            'message': message,
         }
         return HttpResponse(template.render(context, request))
     return redirect('login')
