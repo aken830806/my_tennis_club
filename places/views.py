@@ -1,7 +1,7 @@
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.shortcuts import redirect
 from django.template import loader
-from places.models import Place
+from places.models import Place, Booking
 from places.forms import BookingForm
 
 
@@ -35,3 +35,12 @@ def booking(request, place_id):
         }
         return HttpResponse(template.render(context, request))
     return redirect('login')
+
+
+def booking_list(request):
+    bookings = Booking.objects.filter(user=request.user)
+    template = loader.get_template('all_bookings.html')
+    context = {
+        'bookings': bookings,
+    }
+    return HttpResponse(template.render(context, request))

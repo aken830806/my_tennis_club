@@ -15,5 +15,6 @@ My Tennis Club - List of all places
     {% for place in places %}
     <li>{{ place.name }}</li><button onclick="location.href='{% url "booking" place.id %}'">預約</button>
     {% endfor %}
+    <li><a href="{% url 'booking_list' %}">Booking list</a></li>
 </ul>
 {% endblock %}
